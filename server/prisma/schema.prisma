@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Manager {
+  id        String   @id @default(uuid())
+  userName  String   @unique @map("user_name")
+  password  String
+  nickName  String?  @map("nick_name")
+  avatar    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("managers")
+}
+
+model Role {
+  id   Int    @id @default(1) // 1是管理员 0是普通用户 
+  name String
+  user User[]
+
+  @@map("roles")
+}
+
+model Reservation {
+  id             String           @id @unique @default(uuid())
+  title          String?
+  desc           String?
+  content        String?          @db.Text
+  views          Int              @default(0)
+  link           String?
+  maxCount       Int?             @map("max_count")
+  coverImage     String?          @map("cover_image")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  startAt        DateTime?        @map("start_at")
+  endAt          DateTime?        @map("end_at")
+  userId         String?          @map("user_id")
+  user           User?            @relation(fields: [userId], references: [id])
+  ReservationLog ReservationLog[]
+
+  @@index([userId], map: "reservations_user_id_fkey")
+  @@map("reservations")
+}
+
+model ReservationLog {
+  id            String       @id @unique @default(uuid())
+  title         String
+  desc          String
+  content       String       @db.Text
+  address       String?
+  memberList    Json         @map("member_list")
+  status        Int          @default(0)
+  userId        String?      @map("user_id")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  user          User?        @relation(fields: [userId], references: [id])
+  Reservation   Reservation? @relation(fields: [reservationId], references: [id])
+  reservationId String?
+
+  @@index([userId], map: "reservation_logs_user_id_fkey")
+  @@map("reservation_logs")
+}
+
+model User {
+  id             String           @id @default(uuid())
+  userName       String           @unique @map("user_name")
+  password       String
+  nickName       String?          @map("nick_name")
+  avatar         String?
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  ReservationLog ReservationLog[]
+  Reservation    Reservation[]
+  role           Role?            @relation(fields: [roleId], references: [id])
+  roleId         Int?             @map("role_id")
+
+  @@map("users")
+}

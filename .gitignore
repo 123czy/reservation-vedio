@@ -1,0 +1,5 @@
+front/node_modules/*
+front/dist/*
+front/.env/*
+server/.env/*
+public/uploads/*
