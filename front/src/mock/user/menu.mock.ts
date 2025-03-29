@@ -168,6 +168,41 @@ const mockMenuList: MenuList = [
       },
     ],
   },
+  {
+    code: 'test',
+    label: {
+      zh_CN: '测试',
+      en_US: 'Test',
+    },
+    icon: 'permission',
+    path: '/test',
+    children: [
+      {
+        code: 'Hoc',
+        label: {
+          zh_CN: '',
+          en_US: '高阶组件',
+        },
+        path: '/test/Hoc',
+      },
+      {
+        code: 'Practice',
+        label: {
+          zh_CN: '',
+          en_US: '练习组件',
+        },
+        path: '/test/practice',
+      },
+      {
+        code: 'notFound',
+        label: {
+          zh_CN: '404',
+          en_US: '404',
+        },
+        path: '/permission/404',
+      },
+    ],
+  },
 ];
 
 mock.mock('/user/menu', 'get', intercepter(mockMenuList));

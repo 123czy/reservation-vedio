@@ -14,6 +14,7 @@ import WrapperRouteComponent from './config';
 const NotFound = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/404'));
 const Documentation = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/doucumentation'));
 const Guide = lazy(() => import(/* webpackChunkName: "guide'"*/ '@/pages/guide'));
+const Test = lazy(() => import(/* webpackChunkName: "guide'"*/ '@/pages/guide'));
 const RoutePermission = lazy(() => import(/* webpackChunkName: "route-permission"*/ '@/pages/permission/route'));
 const FormPage = lazy(() => import(/* webpackChunkName: "form'"*/ '@/pages/components/form'));
 const TablePage = lazy(() => import(/* webpackChunkName: "table'"*/ '@/pages/components/table'));
@@ -28,6 +29,10 @@ const BusinessWithRadioCardsPage = lazy(
   () => import(/* webpackChunkName: "with-aside" */ '@/pages/business/with-radio-cards'),
 );
 const BusinessWithTabsPage = lazy(() => import(/* webpackChunkName: "with-tabs" */ '@/pages/business/with-tabs'));
+const TestHocPage = lazy(() => import(/* webpackChunkName: "test-hoc" */ '@/pages/test/hoc')) 
+const TestHooksState = lazy(() => import(/* webpackChunkName: "test" */ '@/pages/test/hooks/state'))
+const TestHooksMemo = lazy(() => import(/* webpackChunkName: "test" */ '@/pages/test/hooks/memo'))
+const PracticeHooksMemo = lazy(() => import(/* webpackChunkName: "test" */ '@/pages/test/practice'))
 
 const routeList: RouteObject[] = [
   {
@@ -101,6 +106,22 @@ const routeList: RouteObject[] = [
       {
         path: 'business/with-tabs',
         element: <WrapperRouteComponent element={<BusinessWithTabsPage />} titleId="title.account" />,
+      },
+      {
+        path: 'test/hoc',
+        element: <WrapperRouteComponent element={<TestHocPage />} titleId="title.account" />,
+      },
+      {
+        path: 'test/hooks/state',
+        element: <WrapperRouteComponent element={<TestHooksState />} titleId="title.account" />,
+      },
+      {
+        path: 'test/hooks/memo',
+        element: <WrapperRouteComponent element={<TestHooksMemo />} titleId="title.account" />,
+      },
+      {
+        path: 'test/practice',
+        element: <WrapperRouteComponent element={<PracticeHooksMemo />} titleId="title.account" />,
       },
       {
         path: '*',
