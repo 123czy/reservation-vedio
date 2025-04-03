@@ -67,6 +67,7 @@ const BasePage = <S extends SearchApi>(props: PageProps<S>, ref: React.Ref<RefPa
     data: [],
   });
 
+
   const [asideCheckedKey, setAsideCheckedKey] = useState(asideValue);
 
   useEffect(() => {

@@ -9,6 +9,7 @@ type Deps = readonly any[];
  * useEffect hook, triggered everytime dependencies change
  * @param callback callback
  * @param deps dependences
+
  */
 export default function useAsyncEffect(callback: Callback, deps: Deps = []) {
   useEffect(() => {
